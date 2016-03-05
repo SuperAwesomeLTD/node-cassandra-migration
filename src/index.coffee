@@ -1,7 +1,6 @@
 _ = require 'lodash'
 Q = require 'q'
 FS = require 'fs'
-moment = require 'moment'
 program = require 'commander'
 moduleVersion = require('../package.json').version
 cassandra = require 'cassandra-driver'
@@ -115,8 +114,8 @@ createVersionTable = (config, client, keyspace) ->
       logDebug "tablesTable: #{tablesTable}"
       logDebug "tableNameColumn: #{tableNameColumn}"
 
-      tableQuery = """SELECT #{tableNameColumn} 
-        FROM #{schemaKeyspace}.#{tablesTable} 
+      tableQuery = """SELECT #{tableNameColumn}
+        FROM #{schemaKeyspace}.#{tablesTable}
         WHERE keyspace_name='#{keyspace}'"""
 
       client.execute tableQuery, (error, results) ->
@@ -131,7 +130,7 @@ createVersionTable = (config, client, keyspace) ->
           createQuery = """CREATE TABLE #{keyspace}.schema_version (
             zero INT,
             version INT,
-            migration_timestamp TIMESTAMP, 
+            migration_timestamp TIMESTAMP,
 
             PRIMARY KEY (zero, version)
           ) WITH CLUSTERING ORDER BY (version DESC)
@@ -174,7 +173,7 @@ runQuery = (config, client, query, version) ->
     else
       d.resolve version
   d.promise
-    
+
 
 # Apply the first migration from the remaining, and move on to the next
 applyMigration = (config, client, keyspace, file, version) ->
@@ -184,7 +183,7 @@ applyMigration = (config, client, keyspace, file, version) ->
 
   cql = "INSERT INTO #{keyspace}.schema_version" +
     " (zero, version, migration_timestamp)" +
-    " VALUES (0, #{version}, '#{moment().toISOString()}');"
+    " VALUES (0, #{version}, '#{new Date().getTime()}');"
 
   queryStrings.push cql
   #logDebug "Queries:", queryStrings

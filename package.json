@@ -6,7 +6,7 @@
     "Migration",
     "Schema"
   ],
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Joel Edwards (https://github.com/joeledwards)",
   "contributors": [
     "Joel Edwards <joeledwards@gmail.com> (https://github.com/joeledwards)"
@@ -28,7 +28,6 @@
     "commander": "^2.9",
     "durations": "^1",
     "lodash": "^3.10",
-    "moment": "^2.10",
     "q": "^1.4"
   },
   "devDependencies": {

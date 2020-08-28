@@ -27,7 +27,7 @@
     "cassandra-driver": "^3.0",
     "commander": "^2.9",
     "durations": "^1",
-    "lodash": "^3.10",
+    "lodash": "^4.17.17",
     "q": "^1.4"
   },
   "devDependencies": {
